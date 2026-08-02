@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/header-iranian-v2.png" alt="Amir Amiri Tabat — AI engineering, backend, bioinformatics, and agent memory" width="100%">
+  <img src="./assets/header-iranian-v3.png" alt="Amir Amiri Tabat — AI engineering, backend, bioinformatics, and agent memory" width="100%">
 </p>
 
 <p align="center">
