@@ -109,7 +109,11 @@ Much of my professional work lives in private repositories, so the public projec
 <img src="./assets/title-activity.svg" alt="GitHub activity" width="100%">
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=TRextabat&bg_color=00000000&color=2A9D9F&line=D3A652&point=E8C77B&area=true&hide_border=true" alt="Amir's public GitHub contribution activity" width="100%">
+  <img src="https://ghchart.rshah.org/2A9D9F/TRextabat" alt="Amir's GitHub contributions over the last year" width="100%">
+</p>
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=TRextabat&theme=transparent&hide_border=true&ring=D3A652&fire=D3A652&currStreakLabel=2A9D9F" alt="Amir's current and longest GitHub contribution streaks">
 </p>
 
 <p align="center">
