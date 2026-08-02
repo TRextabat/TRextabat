@@ -24,10 +24,6 @@ Context can move between a private session, a shared session, and workspace memo
 
 The local memory engine, capture client, and Python and TypeScript SDKs are built and being used with Claude Code and Codex. Shared multi-user sessions, governed context transitions, and the hosted coordination plane are the current private-beta work. Memory Universe also grew from my undergraduate research into long-horizon memory for agent systems.
 
-<p align="center">
-  <img src="./assets/memory-universe-model.svg" alt="Memory Universe model: private person-agent sessions exchange governed context with multi-user, multi-agent shared sessions and durable workspace memory" width="100%">
-</p>
-
 ### PeakATail
 
 At **[BMGLab](https://github.com/BMGLab)**, I lead development of **[PeakATail](https://github.com/BMGLab/PeakATail)**, a Python package for studying alternative polyadenylation in single-cell RNA-seq data.
