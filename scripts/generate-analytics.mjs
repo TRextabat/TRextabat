@@ -70,8 +70,8 @@ const monthBars = monthKeys.map(({ label }, index) => {
 await save("contribution-trend.svg", base("Contribution trend", `${cc.contributionCalendar.totalContributions} contributions across the rolling 12-month window`, monthBars, 350));
 
 const recentCutoff = new Date(now);
-recentCutoff.setUTCDate(recentCutoff.getUTCDate() - 179);
-const recentDays = days.filter((day) => new Date(`${day.date}T00:00:00Z`) >= recentCutoff).slice(-180);
+recentCutoff.setUTCDate(recentCutoff.getUTCDate() - 364);
+const recentDays = days.filter((day) => new Date(`${day.date}T00:00:00Z`) >= recentCutoff).slice(-365);
 const recentMax = Math.max(...recentDays.map((day) => day.contributionCount), 1);
 const plot = { left: 52, right: 1148, top: 110, bottom: 310 };
 const recentPoints = recentDays.map((day, index) => {
@@ -85,13 +85,13 @@ const grid = [0, .25, .5, .75, 1].map((ratio) => {
   const y = plot.bottom - ratio * (plot.bottom - plot.top);
   return `<path d="M${plot.left} ${y}H${plot.right}" stroke="#28445A" stroke-width="1"/><text x="40" y="${y + 4}" text-anchor="end" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="11">${Math.round(recentMax * ratio)}</text>`;
 }).join("");
-const dateLabels = recentPoints.filter((_, index) => index === 0 || index === recentPoints.length - 1 || index % 30 === 0).map(({ x, date }) => {
+const dateLabels = recentPoints.filter(({ date }, index) => index === 0 || index === recentPoints.length - 1 || date.endsWith("-01")).map(({ x, date }) => {
   const label = new Date(`${date}T00:00:00Z`).toLocaleString("en", { month: "short", day: "numeric", timeZone: "UTC" });
   return `<text x="${x}" y="338" text-anchor="middle" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="11">${label}</text>`;
 }).join("");
 const recentTotal = recentDays.reduce((sum, day) => sum + day.contributionCount, 0);
 const recentBody = `${grid}<polygon points="${areaString}" fill="${palette.teal}" fill-opacity=".16"/><polyline points="${pointString}" fill="none" stroke="${palette.teal}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${dateLabels}`;
-await save("recent-contributions.svg", base("Contribution graph · 180 days", `${recentTotal} contributions from ${recentDays[0]?.date || "—"} to ${recentDays.at(-1)?.date || "—"}`, recentBody, 365));
+await save("recent-contributions.svg", base("Contribution graph · 365 days", `${recentTotal} contributions from ${recentDays[0]?.date || "—"} to ${recentDays.at(-1)?.date || "—"}`, recentBody, 365));
 
 const mix = [
   ["Commits", cc.totalCommitContributions, palette.teal],
@@ -107,6 +107,34 @@ const mixRows = mix.map(([label, value, color], index) => {
   return `<text x="52" y="${y + 17}" fill="${palette.ink}" font-family="Arial,sans-serif" font-size="15">${label}</text><rect x="190" y="${y}" width="850" height="24" rx="6" fill="${palette.panel}"/><rect x="190" y="${y}" width="${width}" height="24" rx="6" fill="${color}"/><text x="1065" y="${y + 17}" fill="${palette.ink}" font-family="Arial,sans-serif" font-size="14">${value}</text>`;
 }).join("");
 await save("activity-mix.svg", base("How I contributed", "GitHub contribution types in the rolling 12-month window", mixRows, 380));
+
+const classifiedTotal = mix.reduce((sum, [, value]) => sum + value, 0);
+const contributionTotal = cc.contributionCalendar.totalContributions;
+const density = [
+  ["Commits", cc.totalCommitContributions, palette.teal],
+  ["Pull requests", cc.totalPullRequestContributions, palette.gold],
+  ["Reviews", cc.totalPullRequestReviewContributions, palette.iris],
+  ["Issues", cc.totalIssueContributions, palette.red],
+  ["Repositories", cc.totalRepositoryContributions, "#58A6FF"],
+  ["Other / restricted", Math.max(0, contributionTotal - classifiedTotal), "#52697B"],
+];
+let densityX = 52;
+const densityBar = density.map(([label, value, color]) => {
+  const width = contributionTotal ? (value / contributionTotal) * 1096 : 0;
+  const segment = `<rect x="${densityX.toFixed(1)}" y="382" width="${Math.max(0, width).toFixed(1)}" height="34" fill="${color}"><title>${esc(label)}: ${value}</title></rect>`;
+  densityX += width;
+  return segment;
+}).join("");
+const densityLegend = density.map(([label, value, color], index) => {
+  const column = index % 3;
+  const row = Math.floor(index / 3);
+  const x = 52 + column * 365;
+  const y = 452 + row * 31;
+  const percent = contributionTotal ? Math.round((value / contributionTotal) * 100) : 0;
+  return `<rect x="${x}" y="${y - 12}" width="12" height="12" rx="2" fill="${color}"/><text x="${x + 20}" y="${y}" fill="${palette.ink}" font-family="Arial,sans-serif" font-size="13">${esc(label)} · ${value} (${percent}%)</text>`;
+}).join("");
+const overviewBody = `${grid}<polygon points="${areaString}" fill="${palette.teal}" fill-opacity=".16"/><polyline points="${pointString}" fill="none" stroke="${palette.teal}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${dateLabels}<text x="52" y="365" fill="${palette.ink}" font-family="Georgia,serif" font-size="20">Contribution density</text><clipPath id="densityClip"><rect x="52" y="382" width="1096" height="34" rx="8"/></clipPath><g clip-path="url(#densityClip)">${densityBar}</g>${densityLegend}`;
+await save("contribution-overview.svg", base("Contribution overview · 365 days", `${contributionTotal} total contributions; daily activity and GitHub-exposed contribution types`, overviewBody, 530));
 
 const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const weekdayMax = Math.max(...weekdays, 1);
@@ -157,7 +185,7 @@ const cardBody = cards.map(([label, value], index) => {
 await save("portfolio-summary.svg", base("Public GitHub snapshot", `Generated ${now.toISOString().slice(0, 10)} from GitHub's API`, cardBody, 290));
 
 // Keep the generated asset set aligned with the two analytics selected for the profile.
-for (const name of ["portfolio-summary.svg", "contribution-trend.svg", "weekday-rhythm.svg", "project-contributions.svg"]) {
+for (const name of ["portfolio-summary.svg", "contribution-trend.svg", "weekday-rhythm.svg", "project-contributions.svg", "recent-contributions.svg", "activity-mix.svg"]) {
   await unlink(new URL(name, outDir)).catch((error) => {
     if (error.code !== "ENOENT") throw error;
   });
