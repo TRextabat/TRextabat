@@ -108,12 +108,18 @@ Much of my professional work lives in private repositories, so the public projec
 
 <img src="./assets/title-activity.svg" alt="GitHub activity" width="100%">
 
+<p align="center"><sub>Generated from GitHub data and refreshed daily. Detailed breakdowns show only the activity GitHub exposes publicly.</sub></p>
+
 <p align="center">
-  <img src="https://ghchart.rshah.org/2A9D9F/TRextabat" alt="Amir's GitHub contributions over the last year" width="100%">
+  <img src="./assets/analytics/portfolio-summary.svg" alt="Public GitHub snapshot" width="100%">
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=TRextabat&theme=transparent&hide_border=true&ring=D3A652&fire=D3A652&currStreakLabel=2A9D9F" alt="Amir's current and longest GitHub contribution streaks">
+  <img src="./assets/analytics/contribution-trend.svg" alt="Monthly contribution trend over the last year" width="100%">
+  <img src="./assets/analytics/activity-mix.svg" alt="Contribution activity by type" width="100%">
+  <img src="./assets/analytics/weekday-rhythm.svg" alt="Contribution activity by weekday" width="100%">
+  <img src="./assets/analytics/project-contributions.svg" alt="Public repositories receiving the most commits" width="100%">
+  <img src="./assets/analytics/repository-languages.svg" alt="Primary languages across public repositories" width="100%">
 </p>
 
 <p align="center">
