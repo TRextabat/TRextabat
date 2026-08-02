@@ -1,4 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, unlink, writeFile } from "node:fs/promises";
 
 const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
 const login = process.env.GITHUB_REPOSITORY_OWNER || "TRextabat";
@@ -131,3 +131,10 @@ const cardBody = cards.map(([label, value], index) => {
   return `<rect x="${x}" y="112" width="248" height="132" rx="14" fill="${palette.panel}" stroke="${index === 3 ? palette.gold : palette.teal}"/><text x="${x + 124}" y="170" text-anchor="middle" fill="${index === 3 ? palette.gold : palette.teal}" font-family="Georgia,serif" font-size="34">${value}</text><text x="${x + 124}" y="208" text-anchor="middle" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="12">${label}</text>`;
 }).join("");
 await save("portfolio-summary.svg", base("Public GitHub snapshot", `Generated ${now.toISOString().slice(0, 10)} from GitHub's API`, cardBody, 290));
+
+// Keep the generated asset set aligned with the two analytics selected for the profile.
+for (const name of ["portfolio-summary.svg", "contribution-trend.svg", "weekday-rhythm.svg", "project-contributions.svg"]) {
+  await unlink(new URL(name, outDir)).catch((error) => {
+    if (error.code !== "ENOENT") throw error;
+  });
+}
