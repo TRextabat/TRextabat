@@ -1,0 +1,48 @@
+<svg width="1200" height="430" viewBox="0 0 1200 430" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 10 5 0 10Z" fill="#D3A652"/></marker>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="430"><stop stop-color="#071D33"/><stop offset="1" stop-color="#0B2940"/></linearGradient>
+  </defs>
+  <rect width="1200" height="430" rx="20" fill="url(#bg)"/>
+  <text x="600" y="45" text-anchor="middle" fill="#F2E6CF" font-family="Palatino Linotype, Book Antiqua, Georgia, serif" font-size="27">One workspace. Private and shared work. Context that can move with permission.</text>
+
+  <rect x="52" y="88" width="310" height="260" rx="16" fill="#7567C7" fill-opacity=".16" stroke="#9689E8"/>
+  <text x="207" y="123" text-anchor="middle" fill="#C9C2F4" font-family="Arial, sans-serif" font-size="20" font-weight="700">PRIVATE SESSION</text>
+  <circle cx="145" cy="174" r="28" fill="#7567C7"/><circle cx="269" cy="174" r="28" fill="#283E61" stroke="#9689E8"/>
+  <text x="145" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16">YOU</text>
+  <text x="269" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14">AGENT</text>
+  <path d="M174 174H240" stroke="#9689E8" stroke-width="2"/>
+  <text x="207" y="231" text-anchor="middle" fill="#E5E0F5" font-family="Arial, sans-serif" font-size="16">Private memory stays local</text>
+  <text x="207" y="259" text-anchor="middle" fill="#AFA7D9" font-family="Arial, sans-serif" font-size="14">private notes · local history</text>
+  <text x="207" y="282" text-anchor="middle" fill="#AFA7D9" font-family="Arial, sans-serif" font-size="14">authorized shared context</text>
+  <rect x="108" y="305" width="198" height="25" rx="12" fill="#7567C7"/>
+  <text x="207" y="322" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12">PERSON ↔ BOUND AGENT</text>
+
+  <rect x="445" y="88" width="310" height="260" rx="16" fill="#2D7C78" fill-opacity=".18" stroke="#4DB4AE"/>
+  <text x="600" y="123" text-anchor="middle" fill="#8DD8D2" font-family="Arial, sans-serif" font-size="20" font-weight="700">SHARED SESSION</text>
+  <g fill="#2D7C78" stroke="#73C9C3"><circle cx="501" cy="174" r="24"/><circle cx="600" cy="174" r="24"/><circle cx="699" cy="174" r="24"/></g>
+  <g fill="#F4F1F7" font-family="Arial, sans-serif" font-size="12" text-anchor="middle"><text x="501" y="178">A + AI</text><text x="600" y="178">B + AI</text><text x="699" y="178">C + AI</text></g>
+  <path d="M525 174H576M624 174H675" stroke="#73C9C3" stroke-width="2"/>
+  <text x="600" y="231" text-anchor="middle" fill="#D6ECE8" font-family="Arial, sans-serif" font-size="16">Several people, different agents</text>
+  <text x="600" y="259" text-anchor="middle" fill="#9BC9C5" font-family="Arial, sans-serif" font-size="14">shared decisions · live work</text>
+  <text x="600" y="282" text-anchor="middle" fill="#9BC9C5" font-family="Arial, sans-serif" font-size="14">separate participant identities</text>
+  <rect x="500" y="305" width="200" height="25" rx="12" fill="#2D7C78"/>
+  <text x="600" y="322" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12">MULTI-USER · MULTI-AGENT</text>
+
+  <rect x="838" y="88" width="310" height="260" rx="16" fill="#123A57" stroke="#D3A652"/>
+  <text x="993" y="123" text-anchor="middle" fill="#E5C985" font-family="Arial, sans-serif" font-size="20" font-weight="700">WORKSPACE MEMORY</text>
+  <g fill="none" stroke="#D3A652" stroke-width="1.5"><path d="M910 175 968 151 1033 177 1077 151M910 175l44 62 79-60 44 60M954 237l79 0"/></g>
+  <g fill="#0B2940" stroke="#D3A652" stroke-width="2"><circle cx="910" cy="175" r="13"/><circle cx="968" cy="151" r="13"/><circle cx="1033" cy="177" r="13"/><circle cx="1077" cy="151" r="13"/><circle cx="954" cy="237" r="13"/><circle cx="1077" cy="237" r="13"/></g>
+  <text x="993" y="277" text-anchor="middle" fill="#F2E6CF" font-family="Arial, sans-serif" font-size="16">Durable project understanding</text>
+  <text x="993" y="303" text-anchor="middle" fill="#C5B48E" font-family="Arial, sans-serif" font-size="14">decisions · tasks · evidence · artifacts</text>
+  <text x="993" y="326" text-anchor="middle" fill="#C5B48E" font-family="Arial, sans-serif" font-size="14">relationships · provenance</text>
+
+  <path d="M362 206H445" stroke="#D3A652" stroke-width="2.2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <path d="M755 206H838" stroke="#D3A652" stroke-width="2.2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <rect x="362" y="185" width="83" height="42" rx="10" fill="#071D33" stroke="#D3A652"/>
+  <text x="403" y="202" text-anchor="middle" fill="#E5C985" font-family="Arial, sans-serif" font-size="11">GOVERNED</text><text x="403" y="218" text-anchor="middle" fill="#E5C985" font-family="Arial, sans-serif" font-size="11">CONTEXT</text>
+  <rect x="755" y="185" width="83" height="42" rx="10" fill="#071D33" stroke="#D3A652"/>
+  <text x="797" y="202" text-anchor="middle" fill="#E5C985" font-family="Arial, sans-serif" font-size="11">SELECTED</text><text x="797" y="218" text-anchor="middle" fill="#E5C985" font-family="Arial, sans-serif" font-size="11">PACKETS</text>
+
+  <text x="600" y="392" text-anchor="middle" fill="#B9A98D" font-family="Arial, sans-serif" font-size="14">Every transition keeps its source, purpose, permissions, expiry, and revocation history.</text>
+</svg>

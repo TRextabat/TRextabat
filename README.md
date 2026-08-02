@@ -10,7 +10,7 @@
 
 I'm an AI and backend engineer and a bioinformatics researcher based in İzmir. I enjoy the less glamorous parts of software—the data models, failure handling, pipelines, and tests that make a system dependable. My recent work has focused on multi-agent memory and single-cell RNA sequencing.
 
-## What I'm working on
+<img src="./assets/title-current-work.svg" alt="Current work" width="100%">
 
 ### Memory Universe
 
@@ -24,6 +24,10 @@ Context can move between a private session, a shared session, and workspace memo
 
 The local memory engine, capture client, and Python and TypeScript SDKs are built and being used with Claude Code and Codex. Shared multi-user sessions, governed context transitions, and the hosted coordination plane are the current private-beta work. Memory Universe also grew from my undergraduate research into long-horizon memory for agent systems.
 
+<p align="center">
+  <img src="./assets/memory-universe-model.svg" alt="Memory Universe model: private person-agent sessions exchange governed context with multi-user, multi-agent shared sessions and durable workspace memory" width="100%">
+</p>
+
 ### PeakATail
 
 At **[BMGLab](https://github.com/BMGLab)**, I lead development of **[PeakATail](https://github.com/BMGLab/PeakATail)**, a Python package for studying alternative polyadenylation in single-cell RNA-seq data.
@@ -32,7 +36,7 @@ PeakATail starts from tagged BAM files produced by tools such as STARsolo and Ce
 
 Alongside research code, I've worked on production backends, LLM routing and agent workflows, document-processing pipelines, real-time APIs, observability, and Linux infrastructure. I also led the IEEE Ege bioinformatics team and helped organize more than twelve technical workshops.
 
-## Work beyond GitHub
+<img src="./assets/title-experience.svg" alt="Experience beyond GitHub" width="100%">
 
 Much of my professional work lives in private repositories, so the public projects only show part of what I have built.
 
@@ -41,7 +45,7 @@ Much of my professional work lives in private repositories, so the public projec
 - **SKY-MOD — Backend Engineering Intern:** I built the Mail domain of a multi-tenant Microsoft Graph service, including OAuth2, encrypted tenant credentials, Redis caching, failure handling, tests, and an MCP interface for agents.
 - **BMGLab — Python Developer & Researcher:** In addition to PeakATail, I build single-cell workflows and help maintain the lab's Linux and Proxmox infrastructure.
 
-## A few other projects
+<img src="./assets/title-projects.svg" alt="Selected projects" width="100%">
 
 | | Project | Why it matters |
 |:--:|---|---|
@@ -50,7 +54,7 @@ Much of my professional work lives in private repositories, so the public projec
 | 🔐 | **[Secure UDP Chat](https://github.com/TRextabat/net_sec)** | Combines authenticated messaging, Argon2id, rate limits, token revocation, and session expiry. |
 | 📈 | **[LSTM Price Prediction](https://github.com/TRextabat/CIDL-Project1-LSTM-Price-Prediction)** | Compares four LSTM architectures with walk-forward validation and reproducible experiments. |
 
-## Toolkit
+<img src="./assets/title-toolkit.svg" alt="Technical toolkit" width="100%">
 
 <p align="center">
   <img src="https://skillicons.dev/icons?i=python,go,pytorch,fastapi,django,postgres,redis,docker,kubernetes,linux,git&perline=11" alt="Python, Go, PyTorch, FastAPI, Django, PostgreSQL, Redis, Docker, Kubernetes, Linux, and Git">
@@ -106,11 +110,10 @@ Much of my professional work lives in private repositories, so the public projec
   <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn">
 </p>
 
-## By the numbers
+<img src="./assets/title-activity.svg" alt="GitHub activity" width="100%">
 
 <p align="center">
-  <img height="170" src="https://github-readme-stats.vercel.app/api?username=TRextabat&show_icons=true&hide_border=true&rank_icon=github&theme=transparent&title_color=38BDF8&icon_color=A78BFA&text_color=71717A" alt="Amir's GitHub stats">
-  <img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=TRextabat&layout=compact&hide_border=true&theme=transparent&langs_count=6&title_color=38BDF8&text_color=71717A" alt="Most used languages">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=TRextabat&bg_color=00000000&color=2A9D9F&line=D3A652&point=E8C77B&area=true&hide_border=true" alt="Amir's public GitHub contribution activity" width="100%">
 </p>
 
 <p align="center">
