@@ -1,0 +1,44 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#09090B"/>
+      <stop offset="0.5" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0C1821"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="330" y1="80" x2="880" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8"/>
+      <stop offset="0.5" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#4ADE80"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(600 150) rotate(90) scale(190 580)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#38BDF8" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#38BDF8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="300" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="300" rx="24" fill="url(#glow)"/>
+
+  <g opacity="0.28" stroke="url(#accent)">
+    <path d="M35 220C125 220 140 80 230 80C320 80 335 220 425 220"/>
+    <path d="M775 80C865 80 880 220 970 220C1060 220 1075 80 1165 80"/>
+    <path d="M35 80C125 80 140 220 230 220C320 220 335 80 425 80"/>
+    <path d="M775 220C865 220 880 80 970 80C1060 80 1075 220 1165 220"/>
+  </g>
+
+  <g fill="#38BDF8" opacity="0.5">
+    <circle cx="92" cy="155" r="3"/><circle cx="183" cy="94" r="3"/><circle cx="274" cy="145" r="3"/><circle cx="365" cy="211" r="3"/>
+  </g>
+  <g fill="#4ADE80" opacity="0.5">
+    <circle cx="835" cy="156" r="3"/><circle cx="926" cy="211" r="3"/><circle cx="1017" cy="148" r="3"/><circle cx="1108" cy="91" r="3"/>
+  </g>
+
+  <text x="600" y="126" text-anchor="middle" fill="#FAFAFA" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="46" font-weight="700" letter-spacing="1">AMIR AMIRI TABAT</text>
+  <rect x="387" y="150" width="426" height="2" rx="1" fill="url(#accent)" filter="url(#soft)"/>
+  <rect x="387" y="150" width="426" height="2" rx="1" fill="url(#accent)"/>
+  <text x="600" y="194" text-anchor="middle" fill="#A1A1AA" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" letter-spacing="3">BACKEND · BIOINFORMATICS · AGENT MEMORY</text>
+  <text x="600" y="236" text-anchor="middle" fill="#71717A" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14" letter-spacing="1">İZMİR, TÜRKİYE</text>
+</svg>
