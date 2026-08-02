@@ -111,6 +111,7 @@ Much of my professional work lives in private repositories, so the public projec
 <p align="center"><sub>Generated from GitHub data and refreshed daily. Detailed breakdowns show only the activity GitHub exposes publicly.</sub></p>
 
 <p align="center">
+  <img src="./assets/analytics/recent-contributions.svg" alt="Contribution graph covering the last 180 days" width="100%">
   <img src="./assets/analytics/activity-mix.svg" alt="Contribution activity by type" width="100%">
   <img src="./assets/analytics/repository-languages.svg" alt="Primary languages across public repositories" width="100%">
 </p>

@@ -69,6 +69,30 @@ const monthBars = monthKeys.map(({ label }, index) => {
 }).join("");
 await save("contribution-trend.svg", base("Contribution trend", `${cc.contributionCalendar.totalContributions} contributions across the rolling 12-month window`, monthBars, 350));
 
+const recentCutoff = new Date(now);
+recentCutoff.setUTCDate(recentCutoff.getUTCDate() - 179);
+const recentDays = days.filter((day) => new Date(`${day.date}T00:00:00Z`) >= recentCutoff).slice(-180);
+const recentMax = Math.max(...recentDays.map((day) => day.contributionCount), 1);
+const plot = { left: 52, right: 1148, top: 110, bottom: 310 };
+const recentPoints = recentDays.map((day, index) => {
+  const x = plot.left + (index / Math.max(recentDays.length - 1, 1)) * (plot.right - plot.left);
+  const y = plot.bottom - (day.contributionCount / recentMax) * (plot.bottom - plot.top);
+  return { x, y, ...day };
+});
+const pointString = recentPoints.map(({ x, y }) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
+const areaString = `${plot.left},${plot.bottom} ${pointString} ${plot.right},${plot.bottom}`;
+const grid = [0, .25, .5, .75, 1].map((ratio) => {
+  const y = plot.bottom - ratio * (plot.bottom - plot.top);
+  return `<path d="M${plot.left} ${y}H${plot.right}" stroke="#28445A" stroke-width="1"/><text x="40" y="${y + 4}" text-anchor="end" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="11">${Math.round(recentMax * ratio)}</text>`;
+}).join("");
+const dateLabels = recentPoints.filter((_, index) => index === 0 || index === recentPoints.length - 1 || index % 30 === 0).map(({ x, date }) => {
+  const label = new Date(`${date}T00:00:00Z`).toLocaleString("en", { month: "short", day: "numeric", timeZone: "UTC" });
+  return `<text x="${x}" y="338" text-anchor="middle" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="11">${label}</text>`;
+}).join("");
+const recentTotal = recentDays.reduce((sum, day) => sum + day.contributionCount, 0);
+const recentBody = `${grid}<polygon points="${areaString}" fill="${palette.teal}" fill-opacity=".16"/><polyline points="${pointString}" fill="none" stroke="${palette.teal}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>${dateLabels}`;
+await save("recent-contributions.svg", base("Contribution graph · 180 days", `${recentTotal} contributions from ${recentDays[0]?.date || "—"} to ${recentDays.at(-1)?.date || "—"}`, recentBody, 365));
+
 const mix = [
   ["Commits", cc.totalCommitContributions, palette.teal],
   ["Pull requests", cc.totalPullRequestContributions, palette.gold],
