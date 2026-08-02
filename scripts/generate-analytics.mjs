@@ -7,8 +7,21 @@ if (!token) throw new Error("GITHUB_TOKEN or GH_TOKEN is required");
 const now = new Date();
 const from = new Date(Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), now.getUTCDate()));
 
+async function githubQuery(document, variables) {
+  const response = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", "User-Agent": "profile-analytics" },
+    body: JSON.stringify({ query: document, variables }),
+  });
+  if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
+  const payload = await response.json();
+  if (payload.errors) throw new Error(payload.errors.map((error) => error.message).join("; "));
+  return payload.data;
+}
+
 const query = `query($login:String!,$from:DateTime!,$to:DateTime!){
   user(login:$login){
+    createdAt
     contributionsCollection(from:$from,to:$to){
       totalCommitContributions totalIssueContributions totalPullRequestContributions
       totalPullRequestReviewContributions totalRepositoryContributions
@@ -21,18 +34,24 @@ const query = `query($login:String!,$from:DateTime!,$to:DateTime!){
   }
 }`;
 
-const response = await fetch("https://api.github.com/graphql", {
-  method: "POST",
-  headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json", "User-Agent": "profile-analytics" },
-  body: JSON.stringify({ query, variables: { login, from: from.toISOString(), to: now.toISOString() } }),
-});
-if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
-const payload = await response.json();
-if (payload.errors) throw new Error(payload.errors.map((error) => error.message).join("; "));
-
-const user = payload.data.user;
+const data = await githubQuery(query, { login, from: from.toISOString(), to: now.toISOString() });
+const user = data.user;
 if (!user) throw new Error(`GitHub user ${login} was not found`);
 const cc = user.contributionsCollection;
+const yearlyQuery = `query($login:String!,$from:DateTime!,$to:DateTime!){user(login:$login){contributionsCollection(from:$from,to:$to){totalCommitContributions totalIssueContributions totalPullRequestContributions totalPullRequestReviewContributions totalRepositoryContributions contributionCalendar{totalContributions}}}}`;
+const allTime = { contributions: 0, commits: 0, issues: 0, pullRequests: 0, reviews: 0, repositories: 0 };
+const createdAt = new Date(user.createdAt);
+for (let year = createdAt.getUTCFullYear(); year <= now.getUTCFullYear(); year += 1) {
+  const periodStart = new Date(Math.max(createdAt.getTime(), Date.UTC(year, 0, 1)));
+  const periodEnd = new Date(Math.min(now.getTime(), Date.UTC(year, 11, 31, 23, 59, 59)));
+  const period = (await githubQuery(yearlyQuery, { login, from: periodStart.toISOString(), to: periodEnd.toISOString() })).user.contributionsCollection;
+  allTime.contributions += period.contributionCalendar.totalContributions;
+  allTime.commits += period.totalCommitContributions;
+  allTime.issues += period.totalIssueContributions;
+  allTime.pullRequests += period.totalPullRequestContributions;
+  allTime.reviews += period.totalPullRequestReviewContributions;
+  allTime.repositories += period.totalRepositoryContributions;
+}
 const days = cc.contributionCalendar.weeks.flatMap((week) => week.contributionDays);
 const outDir = new URL("../assets/analytics/", import.meta.url);
 await mkdir(outDir, { recursive: true });
@@ -184,8 +203,27 @@ const cardBody = cards.map(([label, value], index) => {
 }).join("");
 await save("portfolio-summary.svg", base("Public GitHub snapshot", `Generated ${now.toISOString().slice(0, 10)} from GitHub's API`, cardBody, 290));
 
+const activityTotals = [
+  ["CONTRIBUTIONS", allTime.contributions, palette.gold],
+  ["COMMITS", allTime.commits, palette.teal],
+  ["PULL REQUESTS", allTime.pullRequests, "#58A6FF"],
+  ["REVIEWS", allTime.reviews, palette.iris],
+  ["ISSUES", allTime.issues, palette.red],
+  ["REPOSITORIES", repos.length, "#4DB4AE"],
+  ["STARS RECEIVED", totals.stars, "#E3B341"],
+  ["FORKS RECEIVED", totals.forks, "#B5A7E8"],
+];
+const circles = activityTotals.map(([label, value, color], index) => {
+  const column = index % 4;
+  const row = Math.floor(index / 4);
+  const x = 165 + column * 290;
+  const y = 180 + row * 210;
+  return `<circle cx="${x}" cy="${y}" r="76" fill="${palette.panel}" stroke="${color}" stroke-width="4"/><circle cx="${x}" cy="${y}" r="66" fill="none" stroke="${color}" stroke-opacity=".22"/><text x="${x}" y="${y + 9}" text-anchor="middle" fill="${color}" font-family="Georgia,serif" font-size="34">${value.toLocaleString("en")}</text><text x="${x}" y="${y + 105}" text-anchor="middle" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="12" letter-spacing="1">${label}</text>`;
+}).join("");
+await save("activity-totals.svg", base("GitHub activity · all time", `From ${user.createdAt.slice(0, 10)} through ${now.toISOString().slice(0, 10)} · refreshed daily`, circles, 520));
+
 // Keep the generated asset set aligned with the two analytics selected for the profile.
-for (const name of ["portfolio-summary.svg", "contribution-trend.svg", "weekday-rhythm.svg", "project-contributions.svg", "recent-contributions.svg", "activity-mix.svg"]) {
+for (const name of ["portfolio-summary.svg", "contribution-trend.svg", "weekday-rhythm.svg", "project-contributions.svg", "recent-contributions.svg", "activity-mix.svg", "contribution-overview.svg"]) {
   await unlink(new URL(name, outDir)).catch((error) => {
     if (error.code !== "ENOENT") throw error;
   });
