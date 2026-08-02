@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/header.svg" alt="Amir Amiri Tabat — Bioinformatics, AI systems, and backend engineering" width="100%">
+  <img src="./assets/header-iranian.png" alt="Amir Amiri Tabat — AI engineering, backend, bioinformatics, and agent memory" width="100%">
 </p>
 
 <p align="center">
@@ -27,6 +27,15 @@ At **[BMGLab](https://github.com/BMGLab)**, I lead development of **[PeakATail](
 PeakATail starts from tagged BAM files produced by tools such as STARsolo and CellRanger. It calls poly(A) sites at read level, creates per-cell count matrices, clusters cells by their APA profiles, and supports differential APA testing, 3′ UTR length analysis, and cross-dataset cluster matching. The package is currently being benchmarked against reference poly(A) databases while we prepare the manuscript.
 
 Alongside research code, I've worked on production backends, LLM routing and agent workflows, document-processing pipelines, real-time APIs, observability, and Linux infrastructure. I also led the IEEE Ege bioinformatics team and helped organize more than twelve technical workshops.
+
+## Work beyond GitHub
+
+Much of my professional work lives in private repositories, so the public projects only show part of what I have built.
+
+- **LiboBerry — Backend & AI Developer:** I worked on research software with multi-provider LLM routing, LangGraph and Temporal workflows, MCP tools, OCR document processing, real-time chat, and an observability stack built around OpenTelemetry, Prometheus, Grafana, and Loki.
+- **Genfoquest Analytica — Backend Developer & Bioinformatician:** I was the backend and DevOps engineer for SingleCellQuest, building FastAPI services, PostgreSQL and MongoDB storage, Docker deployments, and Nextflow pipelines for single-cell analysis.
+- **SKY-MOD — Backend Engineering Intern:** I built the Mail domain of a multi-tenant Microsoft Graph service, including OAuth2, encrypted tenant credentials, Redis caching, failure handling, tests, and an MCP interface for agents.
+- **BMGLab — Python Developer & Researcher:** In addition to PeakATail, I build single-cell workflows and help maintain the lab's Linux and Proxmox infrastructure.
 
 ## A few other projects
 
