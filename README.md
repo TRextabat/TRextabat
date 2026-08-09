@@ -108,11 +108,11 @@ Much of my professional work lives in private repositories, so the public projec
 
 <img src="./assets/title-activity.svg" alt="GitHub activity" width="100%">
 
-<p align="center"><sub>Generated from GitHub data and refreshed daily. Detailed breakdowns show only the activity GitHub exposes publicly.</sub></p>
+<p align="center"><sub>Generated from authenticated GitHub data and refreshed daily. Private activity is included as anonymous totals; repository names and code are never published.</sub></p>
 
 <p align="center">
   <img src="./assets/analytics/activity-totals.svg" alt="All-time GitHub activity totals" width="100%">
-  <img src="./assets/analytics/repository-languages.svg" alt="Primary languages across public repositories" width="100%">
+  <img src="./assets/analytics/repository-languages.svg" alt="Languages across owned, administered, and contributed repositories" width="100%">
 </p>
 
 <p align="center">
