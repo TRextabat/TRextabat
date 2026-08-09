@@ -6,6 +6,7 @@ if (!token) throw new Error("GITHUB_TOKEN or GH_TOKEN is required");
 
 const now = new Date();
 const from = new Date(Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), now.getUTCDate()));
+const refreshedAt = `${now.toISOString().slice(0, 16).replace("T", " ")} UTC`;
 
 async function githubQuery(document, variables) {
   const response = await fetch("https://api.github.com/graphql", {
@@ -225,7 +226,7 @@ const languageBody = languageRows.map(([name, info], index) => {
   const width = Math.max(4, Math.round((info.count / languageMax) * 650));
   return `<circle cx="62" cy="${y + 10}" r="6" fill="${info.color}"/><text x="80" y="${y + 15}" fill="${palette.ink}" font-family="Arial,sans-serif" font-size="14">${esc(name)}</text><rect x="260" y="${y}" width="700" height="20" rx="5" fill="${palette.panel}"/><rect x="260" y="${y}" width="${width}" height="20" rx="5" fill="${info.color}"/><text x="985" y="${y + 15}" fill="${palette.ink}" font-family="Arial,sans-serif" font-size="13">${info.count} repos</text>`;
 }).join("");
-await save("repository-languages.svg", base("Repository language footprint", "Languages present across repositories I own, administer, or contribute to · private names stay hidden", languageBody, 410));
+await save("repository-languages.svg", base("Repository language footprint", `Owned, administered, and contributed repositories · private names hidden · refreshed ${refreshedAt}`, languageBody, 410));
 
 const totals = repos.reduce((acc, repo) => ({ stars: acc.stars + repo.stars, forks: acc.forks + repo.forks }), { stars: 0, forks: 0 });
 const cards = [["PUBLIC REPOSITORIES", repos.length], ["STARS RECEIVED", totals.stars], ["FORKS RECEIVED", totals.forks], ["YEAR CONTRIBUTIONS", cc.contributionCalendar.totalContributions]];
@@ -252,7 +253,7 @@ const circles = activityTotals.map(([label, value, color], index) => {
   const y = 180 + row * 210;
   return `<circle cx="${x}" cy="${y}" r="76" fill="${palette.panel}" stroke="${color}" stroke-width="4"/><circle cx="${x}" cy="${y}" r="66" fill="none" stroke="${color}" stroke-opacity=".22"/><text x="${x}" y="${y + 9}" text-anchor="middle" fill="${color}" font-family="Georgia,serif" font-size="34">${value.toLocaleString("en")}</text><text x="${x}" y="${y + 105}" text-anchor="middle" fill="${palette.muted}" font-family="Arial,sans-serif" font-size="12" letter-spacing="1">${label}</text>`;
 }).join("");
-await save("activity-totals.svg", base("GitHub activity · all time", `Public and private contribution counts · ${user.createdAt.slice(0, 10)} through ${now.toISOString().slice(0, 10)} · refreshed daily`, circles, 520));
+await save("activity-totals.svg", base("GitHub activity · all time", `Public and private counts since ${user.createdAt.slice(0, 10)} · refreshed ${refreshedAt}`, circles, 520));
 
 // Keep the generated asset set aligned with the two analytics selected for the profile.
 for (const name of ["portfolio-summary.svg", "contribution-trend.svg", "weekday-rhythm.svg", "project-contributions.svg", "recent-contributions.svg", "activity-mix.svg", "contribution-overview.svg"]) {
