@@ -209,9 +209,11 @@ await save("project-contributions.svg", base("Projects receiving my commits", "T
 
 const repos = [...selectedRepositories.values()].filter((repo) => !repo.isFork);
 const languages = new Map();
+const hiddenSupportingLanguages = new Set(["HTML", "CSS", "Mako"]);
 for (const repo of repos) {
   const repoLanguages = await githubRest(`repos/${repo.fullName.split("/").map(encodeURIComponent).join("/")}/languages`);
   for (const name of Object.keys(repoLanguages)) {
+    if (hiddenSupportingLanguages.has(name)) continue;
     const current = languages.get(name) || { count: 0, color: null };
     current.count += 1;
     languages.set(name, current);
