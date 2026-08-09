@@ -24,6 +24,14 @@ Context can move between a private session, a shared session, and workspace memo
 
 The local memory engine, capture client, and Python and TypeScript SDKs are built and being used with Claude Code and Codex. Shared multi-user sessions, governed context transitions, and the hosted coordination plane are the current private-beta work. Memory Universe also grew from my undergraduate research into long-horizon memory for agent systems.
 
+### CiveMate
+
+I'm also building **[CiveMate](https://civemate.com)**, a creator-first cultural participation network that starts with a simple question: what is happening near me, and how can I take part?
+
+CiveMate puts planned and spontaneous cultural activities on a live city map. A musician can open a role for the bassist they are missing, someone can find a theatre night marked **+1 open** rather than go alone, and photographers, performers, or other collaborators can receive lasting credit for work they actually took part in. After an activity, its media, conversation, and credits remain as a shared memory instead of disappearing with a story or group chat.
+
+I am building the product from the backend and event-driven infrastructure through to the bilingual landing experience. The first neighborhood launch is focused on Kadıköy, with an early demo for creators, culture explorers, and local institutions. **[See the landing page →](https://civemate.com)**
+
 ### PeakATail
 
 At **[BMGLab](https://github.com/BMGLab)**, I lead development of **[PeakATail](https://github.com/BMGLab/PeakATail)**, a Python package for studying alternative polyadenylation in single-cell RNA-seq data.
