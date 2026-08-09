@@ -6,7 +6,7 @@ if (!token) throw new Error("GITHUB_TOKEN or GH_TOKEN is required");
 
 const now = new Date();
 const from = new Date(Date.UTC(now.getUTCFullYear() - 1, now.getUTCMonth(), now.getUTCDate()));
-const refreshedAt = `${now.toISOString().slice(0, 16).replace("T", " ")} UTC`;
+const refreshedAt = `${now.toISOString().slice(0, 19).replace("T", " ")} UTC`;
 
 async function githubQuery(document, variables) {
   const response = await fetch("https://api.github.com/graphql", {
